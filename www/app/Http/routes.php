@@ -11,51 +11,35 @@
 |
 */
 
-use App\Task;
-use Illuminate\Http\Request;
+Route::get('/', 'ArticleController@index');
 
-/**
- * Show Task Dashboard
- */
-Route::get('/', function () {
-    return view('tasks', [
-    	'tasks' => Task::orderBy('created_at', 'asc')->get()
+
+Route::resource('article', 'ArticleController');
+Route::resource('comment', 'CommentController');
+Route::resource('category', 'CategoryController');
+Route::resource('about', 'AboutController');
+
+
+Route::controllers([
+    'backend/auth' => 'backend\AuthController',
+    'backend/password' => 'backend\PasswordController',
+    'search'=>'SearchController',
+]);
+
+Route::group(['prefix'=>'backend','middleware'=>'auth'],function(){
+    Route::any('/','backend\HomeController@index');
+    Route::resource('home', 'backend\HomeController');
+    Route::resource('cate','backend\CateController');
+    Route::resource('content','backend\ContentController');
+    Route::resource('article','backend\ArticleController');
+    Route::resource('tags','backend\TagsController');
+    Route::resource('user','backend\UserController');
+    Route::resource('comment','backend\CommentController');
+    Route::resource('nav','backend\NavigationController');
+    Route::resource('links','backend\LinksController');
+    Route::controllers([
+        'system'=>'backend\SystemController',
+        'upload'=>'backend\UploadFileController'
     ]);
+
 });
-
-
-/**
- * Add New Task
- */
-Route::post('/task', function (Request $request) {
-	$validator = Validator::make($request->all(), [
-		'name' => 'required|max:255',
-	]);
-
-	if ($validator->fails()) {
-		return redirect('/')
-			->withInput()
-			->withErrors($validator);
-	}
-
-	$task = new Task;
-	$task->name = $request->name;
-	$task->save();
-
-	return redirect('/');
-});
-
-
-/**
- * Delete Task
- */
-Route::delete('/task/{id}', function ($id) {
-	Task::findOrFail($id)->delete();
-
-	return redirect('/');
-});
-
-/**
- * About
- */
-Route::get('about', 'PagesController@about');
