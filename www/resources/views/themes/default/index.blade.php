@@ -11,10 +11,13 @@
     <div class="collection-head">
         <div class="container">
             <div class="collection-title">
-                <h1 class="collection-header">Yuan Chao</h1>
+                <h1 class="collection-header">Timothy Chow</h1>
                 <div class="collection-info">
                     <span class="meta-info">
-                        如果不能成为拯救世界的神，那就堕落到征服世界的魔吧！
+                        人心筹算自己的道路，惟耶和华指引他的脚步。
+                    </span>
+                    <span class="meta-info">
+                        ---- 箴言16:9
                     </span>
                 </div>
             </div>
