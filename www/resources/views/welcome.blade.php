@@ -38,7 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">Laravel 5<br><span style="font-size:32px">by Mobile Computing Lab</span></div>
             </div>
         </div>
     </body>
